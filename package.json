@@ -1,0 +1,27 @@
+{
+  "name": "electron-pomodoro",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "start": "node_modules/.bin/electron .",
+    "build": "node build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saekis/electron-pomodoro.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saekis/electron-pomodoro/issues"
+  },
+  "homepage": "https://github.com/saekis/electron-pomodoro#readme",
+  "devDependencies": {
+    "electron": "^1.4.14",
+    "electron-packager": "^8.5.0"
+  }
+}
