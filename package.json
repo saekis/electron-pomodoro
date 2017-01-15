@@ -7,7 +7,7 @@
     "doc": "doc"
   },
   "scripts": {
-    "start": "node_modules/.bin/electron .",
+    "start": "node_modules/.bin/electron ./main.js",
     "build": "node build.js"
   },
   "repository": {
@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/saekis/electron-pomodoro#readme",
   "devDependencies": {
+    "dateformat": "^2.0.0",
     "electron": "^1.4.14",
-    "electron-packager": "^8.5.0"
+    "electron-packager": "^8.5.0",
+    "menubar": "^5.2.0"
   }
 }
