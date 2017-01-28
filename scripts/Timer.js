@@ -1,6 +1,5 @@
 'use strict';
 
-const { ipcMain } = require('electron')
 const dateFormat = require("dateformat")
 
 module.exports = class Timer {
@@ -27,10 +26,6 @@ module.exports = class Timer {
 
   type() {
     return this.type
-  }
-
-  setTray(tray) {
-    this.tray = tray
   }
 
   setTime(m, s) {
@@ -83,11 +78,11 @@ module.exports = class Timer {
     clearInterval(this.timer)
     if (this.type === 'work') {
       this.setBreaktime()
-      this.window.webContents.send('finish-timer', 'work');
+      this.window.sendToOtherProcess('finish-timer', 'work')
       this.type = 'break'
     } else {
       this.setWorktime()
-      this.window.webContents.send('finish-timer', 'break');
+      this.window.sendToOtherProcess('finish-timer', 'break')
       this.type = 'work'
     }
   }
