@@ -1,7 +1,7 @@
 import {app, Tray, ipcMain} from 'electron'
 import Timer from './Timer'
 import Window from './Window'
-import { TIMER_STATUS_PAUSE } from '../constants'
+import { TIMER_STATUS_PAUSE, TIMER_STATUS_PROGRESS } from '../constants'
 
 let tray = undefined
 let window = undefined

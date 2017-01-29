@@ -29,10 +29,12 @@
   font-size: 50px;
   text-align: center;
   cursor: pointer;
-}
-.work {
-  color: #ff8c00;
-}
-.break {
-  color: #87ceeb;
+
+  &.work {
+    color: #ff8c00;
+  }
+
+  &.break {
+    color: #87ceeb;
+  }
 }

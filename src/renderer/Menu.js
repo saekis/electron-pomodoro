@@ -43,9 +43,10 @@ export default class Menu extends React.Component{
   }
 
   render() {
+    const type_class_name = this.state.timer_type === TIMER_TYPE_WORK ? 'work' : 'break'
     return (
       <div className="container">
-        <div className={`time ${this.state.timer_type}`}
+        <div className={`time ${type_class_name}`}
              onClick={ this.startTimer.bind(this) }>{ this.state.time }</div>
         <div>
           <i className="fa fa-pause"></i>

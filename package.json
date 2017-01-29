@@ -7,8 +7,9 @@
     "doc": "doc"
   },
   "scripts": {
-    "start": "node_modules/.bin/electron .",
-    "build": "node_modules/webpack/bin/webpack.js"
+    "start": "./node_modules/.bin/electron .",
+    "build": "./node_modules/webpack/bin/webpack.js",
+    "watch": "./node_modules/webpack/bin/webpack.js --watch"
   },
   "repository": {
     "type": "git",
