@@ -1,6 +1,9 @@
 'use strict';
 
-const dateFormat = require("dateformat")
+import dateFormat from "dateformat"
+import notifier from 'node-notifier'
+import path from 'path'
+import { TIMER_TYPE_WORK, TIMER_TYPE_BREAK, TIMER_STATUS_PAUSE } from '../constants'
 
 module.exports = class Timer {
   constructor(tray, window) {
@@ -8,8 +11,8 @@ module.exports = class Timer {
     this.window = window
     this.timer = null
     this.datetime = null
-    this.status = 'stop'
-    this.type = 'work'
+    this.status = TIMER_STATUS_PAUSE
+    this.type = TIMER_TYPE_WORK
   }
 
   timer() {
@@ -43,12 +46,14 @@ module.exports = class Timer {
   setWorktime() {
     const worktime = this.format(0, 10)
     this.tray.setTitle(worktime)
+    this.window.setTime(worktime)
     this.setTime(0, 10)
   }
 
   setBreaktime() {
-    const worktime = this.format(0, 5)
-    this.tray.setTitle(worktime)
+    const breaktime = this.format(0, 5)
+    this.tray.setTitle(breaktime)
+    this.window.setTime(breaktime)
     this.setTime(0, 5)
   }
 
@@ -67,28 +72,48 @@ module.exports = class Timer {
       this.datetime.setSeconds(this.datetime.getSeconds() - 1);
       displaying_time = dateFormat(this.datetime, 'MM:ss')
       this.tray.setTitle(displaying_time)
+      this.window.setTime(displaying_time)
     }, 1000)
   }
 
-  stop() {
+  pause() {
     clearInterval(this.timer)
   }
 
   finish() {
     clearInterval(this.timer)
-    if (this.type === 'work') {
+    this.window.sendToOtherProcess('finish-timer', this.type)
+    if (this.type === TIMER_TYPE_WORK) {
       this.setBreaktime()
-      this.window.sendToOtherProcess('finish-timer', 'work')
-      this.type = 'break'
+      this.type = TIMER_TYPE_BREAK
     } else {
       this.setWorktime()
-      this.window.sendToOtherProcess('finish-timer', 'break')
-      this.type = 'work'
+      this.type = TIMER_TYPE_WORK
     }
+    this.sendNotify(this.type)
   }
 
   format(m, s) {
     const time = new Date(null, null, null, null, m, s)
     return dateFormat(time, 'MM:ss')
+  }
+
+  sendNotify(type) {
+    let title = ''
+    let message = ''
+    if (type === TIMER_TYPE_WORK) {
+      title = 'Hello'
+      message = 'Time to break!'
+    } else {
+      title = 'Hello'
+      message = 'Time to work!'
+    }
+    notifier.notify({
+      title,
+      message,
+      icon: path.join(__dirname, '../../images/tomato.png'),
+      sound: true,
+      wait: true
+    })
   }
 }

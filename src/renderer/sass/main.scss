@@ -25,15 +25,14 @@
   margin-left: -10px;
 }
 
-.button {
-  width: 80%;
-  padding: 10px 0;
-  margin: 10px auto;
-  background: #d3d3d3;
-  border-radius: 5px;
+.time {
+  font-size: 50px;
   text-align: center;
-  display: block;
   cursor: pointer;
-  text-decoration: none;
-  color: #231814;
+}
+.work {
+  color: #ff8c00;
+}
+.break {
+  color: #87ceeb;
 }

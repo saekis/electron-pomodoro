@@ -1,7 +1,8 @@
 'use strict';
 
-const { BrowserWindow } = require('electron')
-const path = require('path')
+import { BrowserWindow } from 'electron'
+import path from 'path'
+const ROOT_PATH = "file://" + path.resolve("")
 
 module.exports = class Window {
   constructor(tray) {
@@ -11,7 +12,7 @@ module.exports = class Window {
   }
 
   create() {
-    const htmlPath = `file://${path.join(__dirname, '../index.html')}`
+    const htmlPath = `${ROOT_PATH}/build/renderer/index.html`
     this.window = new BrowserWindow({
       width: 300,
       height: 450,
@@ -63,6 +64,10 @@ module.exports = class Window {
     const y = Math.round(trayBounds.y + trayBounds.height + 4)
 
     return {x, y}
+  }
+
+  setTime(time) {
+    this.sendToOtherProcess('time', time)
   }
 
   sendToOtherProcess(key, val) {
