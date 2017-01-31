@@ -15,6 +15,8 @@ export default class Menu extends React.Component{
     }
 
     this.registerMainProcess()
+    this.startTimer = this.startTimer.bind(this)
+    this.pauseTimer = this.pauseTimer.bind(this)
   }
 
   registerMainProcess() {
@@ -25,6 +27,8 @@ export default class Menu extends React.Component{
         this.setState({ timer_type: TIMER_TYPE_WORK })
       }
       this.setState({ timer_status: TIMER_STATUS_PAUSE })
+
+      // eNotify.notify({ title: 'Notification title', text: 'Some text' });
     })
 
     ipcRenderer.on('time', (event, time) => {
@@ -43,13 +47,19 @@ export default class Menu extends React.Component{
   }
 
   render() {
-    const type_class_name = this.state.timer_type === TIMER_TYPE_WORK ? 'work' : 'break'
+    const is_work_time = this.state.timer_type === TIMER_TYPE_WORK
+    const is_progress = this.state.timer_status === TIMER_STATUS_PROGRESS
     return (
       <div className="container">
-        <div className={`time ${type_class_name}`}
-             onClick={ this.startTimer.bind(this) }>{ this.state.time }</div>
-        <div>
-          <i className="fa fa-pause"></i>
+        <div className="timer-button-wrapper">
+          <div className={`time ${is_work_time ? 'work' : 'break' }`}
+               onClick={ is_progress ? this.pauseTimer : this.startTimer }>
+            { this.state.time }
+          </div>
+          <div className="timer-button"
+               onClick={ is_progress ? this.pauseTimer : this.startTimer }>
+            <i className={`fa ${is_progress ? 'fa-pause-circle-o' : 'fa-play-circle-o'} ${is_work_time ? 'work' : 'break' }`}></i>
+          </div>
         </div>
       </div>
     )

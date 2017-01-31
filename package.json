@@ -55,7 +55,6 @@
     "webpack": "^1.14.0"
   },
   "dependencies": {
-    "font-awesome": "^4.7.0",
-    "node-notifier": "^5.0.1"
+    "font-awesome": "^4.7.0"
   }
 }

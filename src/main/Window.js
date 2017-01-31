@@ -1,8 +1,7 @@
 'use strict';
 
 import { BrowserWindow } from 'electron'
-import path from 'path'
-const ROOT_PATH = "file://" + path.resolve("")
+import { ROOT_PATH } from '../constants'
 
 module.exports = class Window {
   constructor(tray) {
@@ -26,23 +25,19 @@ module.exports = class Window {
       }
     })
     this.window.loadURL(htmlPath)
-    this.window.openDevTools({mode: 'undocked'})
+    // this.window.openDevTools({mode: 'undocked'})
 
     // Hide the window when it loses focus
     this.window.on('blur', () => {
-      if (!this.window.webContents.isDevToolsOpened()) {
-        this.toggle()
-      }
+      this.toggle()
     })
   }
 
   toggle() {
     if (this.window.isVisible()) {
       this.window.hide()
-      this.tray.setHighlightMode('never')
     } else {
       this.show()
-      this.tray.setHighlightMode('always')
     }
   }
 
@@ -61,7 +56,7 @@ module.exports = class Window {
     const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2))
 
     // Position window 4 pixels vertically below the tray icon
-    const y = Math.round(trayBounds.y + trayBounds.height + 4)
+    const y = Math.round(trayBounds.y + trayBounds.height)
 
     return {x, y}
   }

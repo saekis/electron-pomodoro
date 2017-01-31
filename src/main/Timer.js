@@ -1,8 +1,6 @@
 'use strict';
 
 import dateFormat from "dateformat"
-import notifier from 'node-notifier'
-import path from 'path'
 import { TIMER_TYPE_WORK, TIMER_TYPE_BREAK, TIMER_STATUS_PAUSE } from '../constants'
 
 module.exports = class Timer {
@@ -90,30 +88,10 @@ module.exports = class Timer {
       this.setWorktime()
       this.type = TIMER_TYPE_WORK
     }
-    this.sendNotify(this.type)
   }
 
   format(m, s) {
     const time = new Date(null, null, null, null, m, s)
     return dateFormat(time, 'MM:ss')
-  }
-
-  sendNotify(type) {
-    let title = ''
-    let message = ''
-    if (type === TIMER_TYPE_WORK) {
-      title = 'Hello'
-      message = 'Time to break!'
-    } else {
-      title = 'Hello'
-      message = 'Time to work!'
-    }
-    notifier.notify({
-      title,
-      message,
-      icon: path.join(__dirname, '../../images/tomato.png'),
-      sound: true,
-      wait: true
-    })
   }
 }

@@ -25,11 +25,11 @@ module.exports = [
   },
   {
     entry: {
-      renderer: './src/renderer/index.js'
+      renderer: './src/renderer/app.js'
     },
     output: {
       path: path.join(__dirname, 'build/renderer'),
-      filename: 'index.js'
+      filename: 'bundle.js'
     },
     module: {
       loaders: [
