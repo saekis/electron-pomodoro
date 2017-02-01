@@ -25,11 +25,11 @@ module.exports = class Window {
       }
     })
     this.window.loadURL(htmlPath)
-    // this.window.openDevTools({mode: 'undocked'})
+    this.window.openDevTools({mode: 'undocked'})
 
     // Hide the window when it loses focus
     this.window.on('blur', () => {
-      this.toggle()
+      // this.toggle()
     })
   }
 

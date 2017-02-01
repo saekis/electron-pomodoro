@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url('http://themes.googleusercontent.com/static/fonts/opensans/v5/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff') format('woff');
+}
+
 $outer-border-color: rgba(255, 255, 255, 0);
 $white: #fff;
 $working-color: #ff8c00;
@@ -20,15 +27,25 @@ $gray: #d3d3d3;
   border: 1px solid $outer-border-color;
   border-radius: 5px;
   height: auto;
+  padding: 10px 0 0;
   position: relative;
   width: 100%;
+}
+
+.day-progress {
+  text-align: center;
+
+  .count {
+    color: $working-color;
+  }
 }
 
 .time {
   @extend %absolute-center;
   cursor: pointer;
-  font-size: 45px;
-  font-weight: bold;
+  font-family: 'open sans', arial, sans-serif;
+  font-size: 55px;
+  margin: -10px auto 0;
   text-align: center;
 
   &.work {
@@ -42,7 +59,8 @@ $gray: #d3d3d3;
 
 .timer-button {
   cursor: pointer;
-  font-size: 100px;
+  font-size: 130px;
+  margin-top: -10px;
   opacity: .3;
   text-align: center;
 
@@ -59,4 +77,9 @@ $gray: #d3d3d3;
   .break {
     color: $breaking-color;
   }
+}
+
+.todos {
+  padding: 0 30px 30px;
+  width: 100%;
 }
