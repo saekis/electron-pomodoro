@@ -10,6 +10,9 @@ $white: #fff;
 $working-color: #ff8c00;
 $breaking-color: #87ceeb;
 $gray: #d3d3d3;
+$detaul-text-color: #6d6e71;
+$input-border: #e0e0e0;
+$delete-button-color: #e8e8e8;
 
 %absolute-center {
   left: 0;
@@ -26,13 +29,14 @@ $gray: #d3d3d3;
   background: $white;
   border: 1px solid $outer-border-color;
   border-radius: 5px;
+  color: $detaul-text-color;
   height: auto;
-  padding: 10px 0 0;
   position: relative;
   width: 100%;
 }
 
 .day-progress {
+  margin-top: 12px;
   text-align: center;
 
   .count {
@@ -80,6 +84,44 @@ $gray: #d3d3d3;
 }
 
 .todos {
-  padding: 0 30px 30px;
-  width: 100%;
+  margin: 0 auto;
+  padding: 0 0 30px;
+  width: 80%;
+
+  .form {
+    margin-bottom: 10px;
+    width: 100%;
+
+    .input {
+      border: 1px solid $white;
+      display: block;
+      font-size: 18px;
+      height: 28px;
+      width: 100%;
+    }
+  }
+
+  .todo {
+    cursor: pointer;
+    display: flex;
+    margin: 5px 0;
+
+    .text {
+      align-items: center;
+      display: flex;
+      flex: 1;
+      font-size: 12px;
+
+      &.checked {
+        text-decoration: line-through;
+      }
+    }
+
+    .delete {
+      .fa {
+        color: $delete-button-color;
+        cursor: pointer;
+      }
+    }
+  }
 }

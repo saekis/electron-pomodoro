@@ -3,6 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = [
   {
+    devtool: 'inline-source-map',
     entry: {
       main: './src/main/index.js'
     },
@@ -24,6 +25,7 @@ module.exports = [
     target: "electron"
   },
   {
+    devtool: 'inline-source-map',
     entry: {
       renderer: './src/renderer/app.js'
     },
@@ -45,6 +47,7 @@ module.exports = [
     target: 'electron-renderer'
   },
   {
+    devtool: 'inline-source-map',
     entry: {
       index: './src/renderer/index.html',
       style: './src/renderer/sass/main.scss'
