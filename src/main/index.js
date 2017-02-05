@@ -1,6 +1,7 @@
-const {app, Tray, ipcMain} = require('electron')
-const Timer = require('./scripts/Timer')
-const Window = require('./scripts/Window')
+import {app, Tray, ipcMain} from 'electron'
+import Timer from './Timer'
+import Window from './Window'
+import { TIMER_STATUS_PAUSE, TIMER_STATUS_PROGRESS } from '../constants'
 
 let tray = undefined
 let window = undefined
@@ -17,7 +18,9 @@ app.on('ready', () => {
 })
 
 const createTray = () => {
-  tray = new Tray(__dirname + '/images/tomato.png')
+  const icon_path = './images/tomato.png'
+  tray = new Tray(icon_path)
+  tray.setHighlightMode(false)
   tray.setToolTip('pomodoro')
 }
 
@@ -35,16 +38,14 @@ const setEvents = () => {
   tray.on('click', window.toggle)
 
   ipcMain.on('start-timer', (event) => {
-    timer.setStatus('progress')
+    timer.setStatus(TIMER_STATUS_PROGRESS)
     timer.start()
-    window.toggle()
     event.sender.send('asynchronous-reply', 'start-timer');
   })
 
-  ipcMain.on('stop-timer', (event) => {
-    timer.setStatus('stop')
-    timer.stop()
-    window.toggle()
-    event.sender.send('asynchronous-reply', 'stop-timer');
+  ipcMain.on('pause-timer', (event) => {
+    timer.setStatus(TIMER_STATUS_PAUSE)
+    timer.pause()
+    event.sender.send('asynchronous-reply', 'pause-timer');
   });
 }

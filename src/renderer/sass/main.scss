@@ -1,0 +1,127 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url('http://themes.googleusercontent.com/static/fonts/opensans/v5/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff') format('woff');
+}
+
+$outer-border-color: rgba(255, 255, 255, 0);
+$white: #fff;
+$working-color: #ff8c00;
+$breaking-color: #87ceeb;
+$gray: #d3d3d3;
+$detaul-text-color: #6d6e71;
+$input-border: #e0e0e0;
+$delete-button-color: #e8e8e8;
+
+%absolute-center {
+  left: 0;
+  margin: 0 auto;
+  position: absolute;
+  right: 0;
+}
+
+* {
+  font-family: arial, sans-serif;
+}
+
+.container {
+  background: $white;
+  border: 1px solid $outer-border-color;
+  border-radius: 5px;
+  color: $detaul-text-color;
+  height: auto;
+  position: relative;
+  width: 100%;
+}
+
+.day-progress {
+  margin-top: 12px;
+  text-align: center;
+
+  .count {
+    color: $working-color;
+  }
+}
+
+.time {
+  @extend %absolute-center;
+  cursor: pointer;
+  font-family: 'open sans', arial, sans-serif;
+  font-size: 55px;
+  margin: -10px auto 0;
+  text-align: center;
+
+  &.work {
+    color: $working-color;
+  }
+
+  &.break {
+    color: $breaking-color;
+  }
+}
+
+.timer-button {
+  cursor: pointer;
+  font-size: 130px;
+  margin-top: -10px;
+  opacity: .3;
+  text-align: center;
+
+  &-wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  .work {
+    color: $working-color;
+  }
+
+  .break {
+    color: $breaking-color;
+  }
+}
+
+.todos {
+  margin: 0 auto;
+  padding: 0 0 30px;
+  width: 80%;
+
+  .form {
+    margin-bottom: 10px;
+    width: 100%;
+
+    .input {
+      border: 1px solid $white;
+      display: block;
+      font-size: 18px;
+      height: 28px;
+      width: 100%;
+    }
+  }
+
+  .todo {
+    cursor: pointer;
+    display: flex;
+    margin: 5px 0;
+
+    .text {
+      align-items: center;
+      display: flex;
+      flex: 1;
+      font-size: 12px;
+
+      &.checked {
+        text-decoration: line-through;
+      }
+    }
+
+    .delete {
+      .fa {
+        color: $delete-button-color;
+        cursor: pointer;
+      }
+    }
+  }
+}

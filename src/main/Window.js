@@ -1,7 +1,7 @@
 'use strict';
 
-const { BrowserWindow } = require('electron')
-const path = require('path')
+import { BrowserWindow } from 'electron'
+import { ROOT_PATH } from '../constants'
 
 module.exports = class Window {
   constructor(tray) {
@@ -11,7 +11,7 @@ module.exports = class Window {
   }
 
   create() {
-    const htmlPath = `file://${path.join(__dirname, '../index.html')}`
+    const htmlPath = `${ROOT_PATH}/build/renderer/index.html`
     this.window = new BrowserWindow({
       width: 300,
       height: 450,
@@ -29,19 +29,15 @@ module.exports = class Window {
 
     // Hide the window when it loses focus
     this.window.on('blur', () => {
-      if (!this.window.webContents.isDevToolsOpened()) {
-        this.toggle()
-      }
+      // this.toggle()
     })
   }
 
   toggle() {
     if (this.window.isVisible()) {
       this.window.hide()
-      this.tray.setHighlightMode('never')
     } else {
       this.show()
-      this.tray.setHighlightMode('always')
     }
   }
 
@@ -60,9 +56,13 @@ module.exports = class Window {
     const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2))
 
     // Position window 4 pixels vertically below the tray icon
-    const y = Math.round(trayBounds.y + trayBounds.height + 4)
+    const y = Math.round(trayBounds.y + trayBounds.height)
 
     return {x, y}
+  }
+
+  setTime(time) {
+    this.sendToOtherProcess('time', time)
   }
 
   sendToOtherProcess(key, val) {
