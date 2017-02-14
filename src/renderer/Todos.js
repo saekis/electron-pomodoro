@@ -6,45 +6,18 @@ import ReactDOM from 'react-dom'
 export default class Todos extends React.Component{
   constructor(props) {
     super(props)
-    this.state = {
-      todos: []
-    }
 
-    this.add = this.add.bind(this)
-    this._handleKeyPress = this._handleKeyPress.bind(this)
+    this.onKeyPress = this.onKeyPress.bind(this)
   }
 
-  add(text) {
-    this.setState({
-      todos: [...this.state.todos, { text, checked: false, deleted: false }]
-    })
-  }
-
-  remove() {
-
-  }
-
-  _handleKeyPress(e) {
+  onKeyPress(e) {
     const text = e.target.value
     if (e.key === 'Enter' && text !== '') {
-      this.add(text)
+      this.props.addTodo(text)
 
-      // フォームをクリア
+      // Clear form text
       ReactDOM.findDOMNode(this.refs['text']).value = ''
     }
-  }
-
-  onCheck(i) {
-    const todos = this.state.todos
-    const checked = todos[i].checked
-    todos[i].checked = checked ? false : true
-    this.setState(todos)
-  }
-
-  onDelete(i) {
-    const todos = this.state.todos
-    todos[i].deleted = true
-    this.setState(todos)
   }
 
   render() {
@@ -54,27 +27,28 @@ export default class Todos extends React.Component{
           <input type="text"
                  className="input"
                  ref="text"
-                 onKeyPress={ this._handleKeyPress }
+                 onKeyPress={ this.onKeyPress }
                  placeholder="Enter task name....." />
         </div>
-        { this.state.todos.map((todo, i) => {
-          if (todo.deleted) return null
+        { this.props.todos.map((todo, i) => {
+          if (todo.deleted || todo.done) return null
           return (
             <div className="todo" key={ i }>
               <div className="checkbox">
                 <input type="checkbox"
                        checked={ todo.checked }
-                       onClick={ this.onCheck.bind(this, i) } />
+                       onClick={ () => { this.props.handleOnCheck(i) } }/>
               </div>
               <div className={`text ${todo.checked && 'checked'}`}
-                   onClick={ this.onCheck.bind(this, i) }>{ todo.text }</div>
+                   onClick={ () => { this.props.handleOnCheck(i) } }>{ todo.text }</div>
               <div className="delete">
                 <i className="fa fa-times"
-                   onClick={ this.onDelete.bind(this, i) }></i>
+                   onClick={ () => { this.props.handleOnDelete(i) } }></i>
               </div>
             </div>
           )
         })}
+        <button onClick={ this.props.handleOnClickSendToSlack }>Send to Slack</button>
       </div>
     )
   }

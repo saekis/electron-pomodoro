@@ -41,8 +41,14 @@ module.exports = [
           query: {
             presets: ['es2015', 'react']
           }
+        }, {
+          test: /\.json$/,
+          loader: 'json-loader'
         }
       ]
+    },
+    resolve: {
+      extensions: ['', '.js', '.jsx', '.json']
     },
     target: 'electron-renderer'
   },
