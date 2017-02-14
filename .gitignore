@@ -6,3 +6,5 @@ yarn-error.log
 /app/Locale/**/*.pot
 build/*
 !build/.keep
+/resources/credentials.json
+npm-debug.log.*
