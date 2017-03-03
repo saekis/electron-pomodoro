@@ -48,7 +48,7 @@ export default class Todos extends React.Component{
             </div>
           )
         })}
-        <button onClick={ this.props.handleOnClickSendToSlack }>Send to Slack</button>
+        {/* <button onClick={ this.props.handleOnClickSendToSlack }>Send to Slack</button> */}
       </div>
     )
   }

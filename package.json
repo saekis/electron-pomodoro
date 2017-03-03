@@ -57,6 +57,7 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^4.7.0",
+    "nedb": "^1.8.0"
   }
 }

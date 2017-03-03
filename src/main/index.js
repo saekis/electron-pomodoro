@@ -1,6 +1,7 @@
 import {app, Tray, ipcMain} from 'electron'
 import Timer from './Timer'
 import Window from './Window'
+import DB from './DB'
 import { TIMER_STATUS_PAUSE, TIMER_STATUS_PROGRESS } from '../constants'
 
 let tray = undefined
@@ -14,6 +15,7 @@ app.on('ready', () => {
   createTray()
   createWindow()
   craeteTimer()
+  createDB()
   setEvents()
 })
 
@@ -32,6 +34,10 @@ const createWindow = () => {
 const craeteTimer = () => {
   timer = new Timer(tray, window)
   timer.create()
+}
+
+const createDB = () => {
+  new DB()
 }
 
 const setEvents = () => {
