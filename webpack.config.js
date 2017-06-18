@@ -9,7 +9,7 @@ module.exports = [
     },
     output: {
       path: path.join(__dirname, 'build/browser'),
-      filename: 'index.js'
+      filename: '[name].js'
     },
     module: {
       loaders: [
@@ -48,7 +48,7 @@ module.exports = [
       ]
     },
     resolve: {
-      extensions: ['', '.js', '.jsx', '.json']
+      extensions: ['*', '.js', '.jsx', '.json']
     },
     target: 'electron-renderer'
   },
@@ -60,21 +60,21 @@ module.exports = [
     },
     output: {
       path: path.join(__dirname, 'build/renderer'),
-      filename: 'index.js'
+      filename: '[name].js'
     },
     module: {
       loaders: [
         {
           test: /\.html$/,
-          loader: "file?name=[name].[ext]"
+          loader: "file-loader?name=[name].[ext]"
         },
         {
           test: /\.css$/,
-          loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+          loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
         },
         {
           test: /\.scss$/,
-          loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
+          loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader!sass-loader' })
         }
       ]
     },
