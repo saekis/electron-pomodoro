@@ -9,21 +9,21 @@ import DB from '../main/DB'
 export default class Menu extends React.Component{
   constructor(props) {
     super(props)
+    this.db = new DB()
 
     this.state = {
       timer_type: TIMER_TYPE_WORK,
       timer_status: TIMER_STATUS_PAUSE,
       time: '00:10',
-      pomodoro_count: 0,
+      pomodoro_count: '',
       todos: []
     }
 
     this.registerMainProcess()
-
+    this.updateCountFromDB()
     this.startTimer = this.startTimer.bind(this)
     this.pauseTimer = this.pauseTimer.bind(this)
     this.incrementPomodoroCount = this.incrementPomodoroCount.bind(this)
-    this.db = new DB()
   }
 
   registerMainProcess() {
@@ -40,6 +40,16 @@ export default class Menu extends React.Component{
 
     ipcRenderer.on('time', (event, time) => {
       this.setState({ time })
+    })
+  }
+
+  updateCountFromDB() {
+    this.db.getCountInToday((err, data) => {
+      let pomodoro_count = 0
+      if (data) {
+        pomodoro_count = data.pomodoro_count
+      }
+      this.setState({ pomodoro_count })
     })
   }
 

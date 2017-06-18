@@ -8,14 +8,21 @@ module.exports = class DB {
     this.db = new Datastore({ filename: "db/ne.db", autoload: true })
   }
 
+  getCountInToday(callback) {
+    const datetime = new Datetime()
+    const dateYmd = datetime.getYmd()
+    let count = 0;
+    this.db.findOne({date: dateYmd}, callback)
+  }
+
   updateCount(new_count) {
     const datetime = new Datetime()
-    const dateYm = datetime.getYm()
-    this.db.findOne({date: dateYm}, (err, data) => {
+    const dateYmd = datetime.getYmd()
+    this.db.findOne({date: dateYmd}, (err, data) => {
       if (data) {
         this.db.remove ({_id: data._id}, {});
       }
-      this.db.insert({pomodoro_count: new_count, date: dateYm}, () => {
+      this.db.insert({pomodoro_count: new_count, date: dateYmd}, () => {
       })
     })
   }
