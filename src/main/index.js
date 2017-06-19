@@ -48,4 +48,8 @@ const setEvents = () => {
     timer.pause()
     event.sender.send('asynchronous-reply', 'pause-timer');
   });
+
+  ipcMain.on('quit-app', (event) => {
+    app.quit();
+  });
 }

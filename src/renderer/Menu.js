@@ -16,7 +16,8 @@ export default class Menu extends React.Component{
       timer_status: TIMER_STATUS_PAUSE,
       time: '00:10',
       pomodoro_count: '',
-      todos: []
+      todos: [],
+      show_settings_box: false
     }
 
     this.registerMainProcess()
@@ -99,11 +100,34 @@ export default class Menu extends React.Component{
     this.setState({ todos })
   }
 
+  quitApp() {
+    ipcRenderer.send('quit-app');
+  }
+
+  clickSettingsIcon() {
+    if (this.state.show_settings_box) {
+      this.setState({ show_settings_box: false })
+    } else {
+      this.setState({ show_settings_box: true })
+    }
+  }
+
   render() {
     const is_worktime = this.state.timer_type === TIMER_TYPE_WORK
     const is_progress = this.state.timer_status === TIMER_STATUS_PROGRESS
     return (
       <div className="container">
+        <div className="settings"
+             onClick={ this.clickSettingsIcon.bind(this) }>
+          <i className="fa fa-cog"></i>
+        </div>
+        {this.state.show_settings_box &&
+          <div className="settings-box">
+            <a className="settings-box-item">reset count</a>
+            <a className="settings-box-item"
+               onClick={ this.quitApp }>quit</a>
+          </div>
+        }
         <div className="day-progress">
           <span>Today</span> <span className="count">{ this.state.pomodoro_count }/10</span>
         </div>

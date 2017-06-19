@@ -23,6 +23,12 @@ $delete-button-color: #e8e8e8;
 
 * {
   font-family: arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
 }
 
 .container {
@@ -33,6 +39,40 @@ $delete-button-color: #e8e8e8;
   height: auto;
   position: relative;
   width: 100%;
+}
+
+.settings {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 26px;
+  margin: 6px 12px 0 0;
+}
+
+.settings-box {
+  border: 1px solid #d3d3d3;
+  position: absolute;
+  background: #fff;
+  width: 100px;
+  right: 0;
+  top: 0;
+  text-align: center;
+  margin: 34px 12px 0 0;
+  z-index: 99;
+  &-item {
+    display: block;
+    cursor: pointer;
+    padding: 3px;
+    color: #000;
+    &:hover {
+      background: #448fff;
+      color: #fff;
+    }
+    &:last-child {
+      border-top: 1px solid #d3d3d3;
+    }
+  }
 }
 
 .day-progress {
