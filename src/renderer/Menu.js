@@ -55,8 +55,10 @@ export default class Menu extends React.Component{
   }
 
   resetCount() {
-    this.db.resetTodayCount()
-    this.setState({ pomodoro_count: 0 })
+    if (confirm(`Reset today's pomodoro count?`)) {
+      this.db.resetTodayCount()
+      this.setState({ pomodoro_count: 0 })
+    }
   }
 
   startTimer() {
@@ -106,7 +108,9 @@ export default class Menu extends React.Component{
   }
 
   quitApp() {
-    ipcRenderer.send('quit-app');
+    if (confirm('quit app??')) {
+      ipcRenderer.send('quit-app');
+    }
   }
 
   clickSettingsIcon() {
