@@ -26,4 +26,8 @@ module.exports = class DB {
       })
     })
   }
+
+  resetTodayCount() {
+    this.updateCount(0)
+  }
 }

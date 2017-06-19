@@ -54,6 +54,11 @@ export default class Menu extends React.Component{
     })
   }
 
+  resetCount() {
+    this.db.resetTodayCount()
+    this.setState({ pomodoro_count: 0 })
+  }
+
   startTimer() {
     this.setState({ timer_status: TIMER_STATUS_PROGRESS })
     ipcRenderer.send('start-timer');
@@ -123,7 +128,8 @@ export default class Menu extends React.Component{
         </div>
         {this.state.show_settings_box &&
           <div className="settings-box">
-            <a className="settings-box-item">reset count</a>
+            <a className="settings-box-item"
+               onClick={ this.resetCount.bind(this) }>reset count</a>
             <a className="settings-box-item"
                onClick={ this.quitApp }>quit</a>
           </div>
