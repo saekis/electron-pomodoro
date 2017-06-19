@@ -18,7 +18,7 @@ app.on('ready', () => {
 })
 
 const createTray = () => {
-  const icon_path = './images/tomato.png'
+  const icon_path = './resources/tomato.png'
   tray = new Tray(icon_path)
   tray.setHighlightMode(false)
   tray.setToolTip('pomodoro')
