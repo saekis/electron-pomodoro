@@ -58,6 +58,7 @@ export default class Menu extends React.Component{
     if (confirm(`Reset today's pomodoro count?`)) {
       this.db.resetTodayCount()
       this.setState({ pomodoro_count: 0 })
+      this.hideSettingsBox()
     }
   }
 
@@ -115,10 +116,18 @@ export default class Menu extends React.Component{
 
   clickSettingsIcon() {
     if (this.state.show_settings_box) {
-      this.setState({ show_settings_box: false })
+      this.showSettingsBox()
     } else {
-      this.setState({ show_settings_box: true })
+      this.hideSettingsBox()
     }
+  }
+
+  showSettingsBox() {
+    this.setState({ show_settings_box: false })
+  }
+
+  hideSettingsBox() {
+    this.setState({ show_settings_box: true })
   }
 
   render() {
