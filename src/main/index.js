@@ -36,6 +36,8 @@ const craeteTimer = () => {
 
 const setEvents = () => {
   tray.on('click', window.toggle)
+  tray.on('right-click', window.toggle)
+  tray.on('double-click', window.toggle)
 
   ipcMain.on('start-timer', (event) => {
     timer.setStatus(TIMER_STATUS_PROGRESS)

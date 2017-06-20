@@ -58,6 +58,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "font-awesome": "^4.7.0",
-    "nedb": "^1.8.0"
+    "nedb": "^1.8.0",
+    "react-transition-group": "^1.2.0"
   }
 }

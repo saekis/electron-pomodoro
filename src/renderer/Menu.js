@@ -4,7 +4,9 @@ import React from 'react'
 import { ipcRenderer } from 'electron'
 import { TIMER_TYPE_WORK, TIMER_TYPE_BREAK, TIMER_STATUS_PROGRESS, TIMER_STATUS_PAUSE } from '../constants'
 import Todos from './Todos'
+import Archive from './Archive'
 import DB from '../main/DB'
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 
 export default class Menu extends React.Component{
   constructor(props) {
@@ -17,7 +19,8 @@ export default class Menu extends React.Component{
       time: '00:10',
       pomodoro_count: '',
       todos: [],
-      show_settings_box: false
+      show_settings_box: false,
+      is_archive_mode: false
     }
 
     this.registerMainProcess()
@@ -130,9 +133,27 @@ export default class Menu extends React.Component{
     this.setState({ show_settings_box: true })
   }
 
+  toArchiveMode() {
+    this.setState({ is_archive_mode: true })
+  }
+
   render() {
     const is_worktime = this.state.timer_type === TIMER_TYPE_WORK
     const is_progress = this.state.timer_status === TIMER_STATUS_PROGRESS
+
+    if (this.state.is_archive_mode) {
+      return (
+        <div className="container">
+          <CSSTransitionGroup
+              component="div"
+              transitionName="example"
+              transitionEnterTimeout={ 500 }
+              transitionLeaveTimeout={ 300 }>
+              <Archive />
+          </CSSTransitionGroup>
+        </div>
+      )
+    }
     return (
       <div className="container">
         <div className="settings"
@@ -147,6 +168,10 @@ export default class Menu extends React.Component{
                onClick={ this.quitApp }>quit</a>
           </div>
         }
+        <div className="archive-link"
+             onClick={ this.toArchiveMode.bind(this) }>
+          <i className="fa fa-chevron-left"></i>
+        </div>
         <div className="day-progress">
           <span>Today</span> <span className="count">{ this.state.pomodoro_count }/10</span>
         </div>
