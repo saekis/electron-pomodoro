@@ -16,8 +16,9 @@ module.exports = class DB {
   }
 
   find(callback) {
-    this.db.find({}, callback)
+    this.db.find().sort({ date: -1 }).exec(callback)
   }
+
 
   updateCount(new_count) {
     const datetime = new Datetime()
