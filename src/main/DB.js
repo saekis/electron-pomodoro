@@ -15,6 +15,10 @@ module.exports = class DB {
     this.db.findOne({date: dateYmd}, callback)
   }
 
+  find(callback) {
+    this.db.find({}, callback)
+  }
+
   updateCount(new_count) {
     const datetime = new Datetime()
     const dateYmd = datetime.getYmd()

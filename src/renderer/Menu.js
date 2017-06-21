@@ -6,7 +6,6 @@ import { TIMER_TYPE_WORK, TIMER_TYPE_BREAK, TIMER_STATUS_PROGRESS, TIMER_STATUS_
 import Todos from './Todos'
 import Archive from './Archive'
 import DB from '../main/DB'
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 
 export default class Menu extends React.Component{
   constructor(props) {
@@ -137,6 +136,10 @@ export default class Menu extends React.Component{
     this.setState({ is_archive_mode: true })
   }
 
+  toTimerMode() {
+    this.setState({ is_archive_mode: false })
+  }
+
   render() {
     const is_worktime = this.state.timer_type === TIMER_TYPE_WORK
     const is_progress = this.state.timer_status === TIMER_STATUS_PROGRESS
@@ -144,13 +147,7 @@ export default class Menu extends React.Component{
     if (this.state.is_archive_mode) {
       return (
         <div className="container">
-          <CSSTransitionGroup
-              component="div"
-              transitionName="example"
-              transitionEnterTimeout={ 500 }
-              transitionLeaveTimeout={ 300 }>
-              <Archive />
-          </CSSTransitionGroup>
+          <Archive backToTimerMode={ this.toTimerMode.bind(this) } />
         </div>
       )
     }
