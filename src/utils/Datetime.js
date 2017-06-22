@@ -7,25 +7,25 @@ module.exports = class Datetime {
   }
 
   getYmd() {
-    const year = this.year(this.date)
-    const month = this.month(this.date)
-    const day = this.day(this.date)
+    const year = this.year()
+    const month = this.toDigit(this.month())
+    const day = this.toDigit(this.day())
     return `${year}-${month}-${day}`
   }
 
-  month(date) {
-    return this.toDigit(parseInt(date.getMonth()) + 1)
+  month() {
+    return parseInt(this.date.getMonth()) + 1
   }
 
-  year(date) {
-    return parseInt(date.getFullYear())
+  year() {
+    return parseInt(this.date.getFullYear())
   }
 
-  day(date) {
-    return this.toDigit(parseInt(date.getDate()))
+  day() {
+    return parseInt(this.date.getDate())
   }
 
   toDigit(number) {
-    return ('00' + number).slice(-2);
+    return ('00' + number).slice(-2)
   }
 }

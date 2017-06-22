@@ -19,7 +19,6 @@ module.exports = class DB {
     this.db.find().sort({ date: -1 }).exec(callback)
   }
 
-
   updateCount(new_count) {
     const datetime = new Datetime()
     const dateYmd = datetime.getYmd()
@@ -27,7 +26,13 @@ module.exports = class DB {
       if (data) {
         this.db.remove ({_id: data._id}, {});
       }
-      this.db.insert({pomodoro_count: new_count, date: dateYmd}, () => {
+      this.db.insert({
+        pomodoro_count: new_count,
+        date: dateYmd,
+        year: datetime.year(),
+        month: datetime.month(),
+        day: datetime.day()
+      }, () => {
       })
     })
   }
