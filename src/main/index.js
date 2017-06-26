@@ -1,7 +1,8 @@
-import {app, Tray, ipcMain} from 'electron'
+import {app, Tray, ipcMain, nativeImage} from 'electron'
+import path from 'path'
 import Timer from './Timer'
 import Window from './Window'
-import { TIMER_STATUS_PAUSE, TIMER_STATUS_PROGRESS } from '../constants'
+import { TIMER_STATUS_PAUSE, TIMER_STATUS_PROGRESS, ROOT_PATH } from '../constants'
 
 let tray = undefined
 let window = undefined
@@ -18,7 +19,7 @@ app.on('ready', () => {
 })
 
 const createTray = () => {
-  const icon_path = './resources/tomato.png'
+  const icon_path = nativeImage.createFromPath(__dirname, 'resources', 'tomato.png')
   tray = new Tray(icon_path)
   tray.setHighlightMode(false)
   tray.setToolTip('pomodoro')

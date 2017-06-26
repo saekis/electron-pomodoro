@@ -4,4 +4,5 @@ export const TIMER_STATUS_PROGRESS = 'TIMER_STATUS_PROGRESS'
 export const TIMER_STATUS_PAUSE = 'TIMER_STATUS_PAUSE'
 
 import path from 'path'
-export const ROOT_PATH = "file://" + path.resolve("")
+// export const ROOT_PATH = "file://" + path.resolve("")
+export const ROOT_PATH = `file://${__dirname}`

@@ -1,6 +1,7 @@
 'use strict';
 
 import { BrowserWindow } from 'electron'
+import path from 'path'
 import { ROOT_PATH } from '../constants'
 
 module.exports = class Window {
@@ -11,7 +12,7 @@ module.exports = class Window {
   }
 
   create() {
-    const htmlPath = `${ROOT_PATH}/build/renderer/index.html`
+    const htmlPath = `file:///build/renderer/index.html`
     this.window = new BrowserWindow({
       width: 300,
       height: 450,

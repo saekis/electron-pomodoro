@@ -81,5 +81,20 @@ module.exports = [
     plugins: [
       new ExtractTextPlugin("css/[name].css")
     ]
+  },
+  {
+    devtool: 'inline-source-map',
+    entry: {
+      tomato: './resources/tomato.png'
+    },
+    output: {
+      path: path.join(__dirname, 'build/resources'),
+      filename: '[name].png'
+    },
+    module: {
+      loaders: [
+        { test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3)$/, loader: "file-loader" }
+      ]
+    }
   }
 ];
