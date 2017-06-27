@@ -12,7 +12,7 @@ module.exports = class Window {
   }
 
   create() {
-    const htmlPath = `file:///build/renderer/index.html`
+    const htmlPath = `file:///${__dirname}/build/renderer/index.html`
     this.window = new BrowserWindow({
       width: 300,
       height: 450,
